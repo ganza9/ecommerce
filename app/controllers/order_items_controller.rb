@@ -78,6 +78,6 @@ class OrderItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:order_item).permit(:quantity, :product_id)
+      params.require(:order_item).permit(:quantity, :product_id, :price)
     end
 end
