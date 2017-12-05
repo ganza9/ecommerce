@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   root :to => 'products#index'
 
+  resource :cart, only: [:show]
   resources :accounts
   devise_for :users
 
-  resources :products do
-    resources :order_items
-  end
+  resources :products
 
   resources :orders do
     resources :order_items

@@ -19,7 +19,7 @@
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%= form_with model: @order_item do |f| %>
+        <%= form_with(model: @order_items) do |f| %>
             <td><%= f.hidden_field :product_id, value: product.id %></td>
             <td><%= f.number_field :quantity %></td>
             <td><%= f.submit "Add to cart" %></td>

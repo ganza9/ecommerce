@@ -26,9 +26,10 @@ class OrderItemsController < ApplicationController
   def create
     @order = current_order
     @item = @order.order_items.new(item_params)
+    @item.save
     @order.save
     session[:order_id] = @order.id
-    redirect_to products_path
+    redirect_to cart_path
 
     # respond_to do |format|
     #   if @order_item.save
@@ -57,13 +58,17 @@ class OrderItemsController < ApplicationController
   #
   # # DELETE /order_items/1
   # # DELETE /order_items/1.json
-  # def destroy
-  #   @order_item.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to order_items_url, notice: 'Order item was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def destroy
+    @order = current_order
+    @item = @order.order_items.find(params[:id])
+    @item.destroy
+    @order.save
+    redirect_to cart_path
+    # respond_to do |format|
+    #   format.html { redirect_to order_items_url, notice: 'Order item was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
